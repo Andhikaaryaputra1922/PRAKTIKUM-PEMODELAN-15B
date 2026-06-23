@@ -27,8 +27,20 @@ html, body, [class*="css"] {
 }
 .stApp { background-color: #F8F9FC !important; }
 .block-container {
-    padding: 2rem 2rem 2rem !important;
+    padding: 2rem 1rem 2rem !important;
     max-width: 100% !important;
+}
+@media (max-width: 768px) {
+    .block-container {
+        padding: 1.5rem 0.5rem !important;
+    }
+    [data-testid="stMetric"] {
+        padding: 1rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 1.4rem !important;
+    }
 }
 section[data-testid="stSidebar"] {
     background-color: #1A2F50 !important;
@@ -330,12 +342,12 @@ with st.sidebar:
 # --- HEADER
 st.markdown(f"""
 <div style="background:#3A6EA5;border:4px solid #1A2F50;
-            box-shadow:8px 8px 0 #D6E0EE;padding:1.25rem 1.5rem;
-            margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;">
-    <div>{icon('store', 40, '#F8F9FC')}</div>
+            box-shadow:6px 6px 0 #D6E0EE;padding:1rem;
+            margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem;flex-wrap:wrap;justify-content:center;text-align:center;">
+    <div>{icon('store', 32, '#F8F9FC')}</div>
     <div>
         <div style="font-family:'Space Grotesk',sans-serif;font-weight:900;
-                    font-size:clamp(1.4rem,3vw,2.2rem);line-height:1;color:#F8F9FC;">SIMULATOR KEBIJAKAN TOKO</div>
+                    font-size:clamp(1.2rem,5vw,2.2rem);line-height:1.2;color:#F8F9FC;">SIMULATOR KEBIJAKAN TOKO</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
