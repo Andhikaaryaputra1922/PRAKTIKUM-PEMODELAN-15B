@@ -282,13 +282,15 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-    # 1. LOAD MODEL (Menggunakan .pkl sesuai modul dosen)
-    import os
-    
-    uploaded_file = st.file_uploader("Upload model_bisnis.pkl", type=["pkl"], label_visibility="collapsed")
-    
+    # 1. LOAD MODEL
+    # Secara default, gunakan model demo (5 baris data sesuai alur modul dosen)
+    # agar nilai baseline konsisten = Rp 80.62 Juta (Iklan=10, Diskon=10).
+    # Pengguna dapat meng-upload file .pkl milik sendiri untuk mengganti model.
+
     def alert_ui(msg, type, icn):
         st.markdown(f"<div class='custom-alert {type}'>{icon(icn, 20)} <div>{msg}</div></div>", unsafe_allow_html=True)
+
+    uploaded_file = st.file_uploader("Upload model_bisnis.pkl (Opsional)", type=["pkl"], label_visibility="collapsed")
 
     if uploaded_file is not None:
         try:
@@ -299,20 +301,10 @@ with st.sidebar:
             alert_ui(f"Gagal memuat PKL: {e}", "error", "alert-triangle")
             model, bl_iklan, bl_diskon = load_demo_model()
             src = "Demo (5 baris)"
-    elif os.path.exists("model_bisnis.pkl"):
-        try:
-            # Auto-load jika file ada di folder yang sama
-            model, bl_iklan, bl_diskon = load_model_from_pkl("model_bisnis.pkl")
-            src = "Lokal (.pkl)"
-            alert_ui("Model Asli Otomatis Terdeteksi & Dimuat!", "success", "check-circle")
-        except Exception as e:
-            alert_ui(f"Gagal memuat PKL lokal: {e}", "error", "alert-triangle")
-            model, bl_iklan, bl_diskon = load_demo_model()
-            src = "Demo (5 baris)"
     else:
+        # Default: gunakan model demo sesuai data di modul dosen
         model, bl_iklan, bl_diskon = load_demo_model()
         src = "Demo (5 baris)"
-        alert_ui("Mode Demo Aktif. File model_bisnis.pkl tidak ditemukan.", "warning", "info")
 
     st.markdown("<hr>", unsafe_allow_html=True)
     
