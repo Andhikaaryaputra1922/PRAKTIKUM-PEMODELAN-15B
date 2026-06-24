@@ -293,11 +293,7 @@ with st.sidebar:
     st.markdown("<div style='font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;'>GANTI MODEL (Opsional)</div>", unsafe_allow_html=True)
     uploaded_file = st.file_uploader("Upload model_bisnis.pkl (Opsional)", type=["pkl"], label_visibility="collapsed")
     
-    st.markdown(f"""
-    <div style="background-color: rgba(26, 47, 80, 0.05); border-left: 3px solid #3A6EA5; padding: 8px 12px; font-size: 0.75rem; color: #1A2F50; margin-top: -10px; margin-bottom: 15px; border-radius: 0 4px 4px 0;">
-        {icon('info', 12, '#3A6EA5')} <strong>Info:</strong> Upload file <code>model_bisnis.pkl</code> Anda untuk mengganti model demo bawaan (5 baris) dengan model asli hasil training dari dataset.
-    </div>
-    """, unsafe_allow_html=True)
+    st.info("Upload file `model_bisnis.pkl` Anda untuk mengganti model demo bawaan (5 baris) dengan model asli hasil training dari dataset.", icon="ℹ️")
 
     if uploaded_file is not None:
         try:
