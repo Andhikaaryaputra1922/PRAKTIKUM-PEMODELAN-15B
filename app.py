@@ -327,7 +327,7 @@ with st.sidebar:
     st.markdown("<hr>", unsafe_allow_html=True)
     
     # --- TIPS #4: VALIDASI BASELINE (SIMPAN NILAI BASELINE) ---
-    st.markdown(f"<div style='color:#D6E0EE;font-weight:bold;margin-bottom:10px;font-size:0.8rem;'>{icon('database', 14, '#D6E0EE')} 1. KONDISI SAAT INI (BASELINE)</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='color:#D6E0EE;font-weight:bold;margin-bottom:10px;font-size:0.8rem;'>{icon('database', 14, '#D6E0EE')} KONDISI SAAT INI (BASELINE)</div>", unsafe_allow_html=True)
     
     col_b1, col_b2 = st.columns(2)
     with col_b1:
@@ -338,7 +338,7 @@ with st.sidebar:
     st.markdown("<br>", unsafe_allow_html=True)
     
     # 2. CAPTURE INPUT (Sliding widget intervensi)
-    st.markdown(f"<div style='color:#D6E0EE;font-weight:bold;margin-bottom:10px;font-size:0.8rem;'>{icon('sliders', 14, '#D6E0EE')} 2. TUAS KEBIJAKAN (INTERVENSI)</div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='color:#D6E0EE;font-weight:bold;margin-bottom:10px;font-size:0.8rem;'>{icon('sliders', 14, '#D6E0EE')} TUAS KEBIJAKAN (INTERVENSI)</div>", unsafe_allow_html=True)
 
     iklan_slider  = st.slider("ANGGARAN IKLAN BARU (JUTA)", 0, 50, base_iklan, 1, key="slider_iklan")
     diskon_slider = st.slider("BESARAN DISKON BARU (%)",    0, 50, base_diskon, 1, key="slider_diskon")
