@@ -398,11 +398,40 @@ with c3:
 # Menggunakan st.info() dan st.warning() sesuai arahan modul untuk penjelasan naratif
 st.markdown(f"<div class='section-header'>{icon('megaphone', 28)} Analisis Kebijakan</div>", unsafe_allow_html=True)
 if delta > 0:
-    st.success(f"**Rekomendasi Positif:** Keputusan Anda menaikkan/mengubah tuas kebijakan terbukti efektif. Toko diprediksi akan mengalami **peningkatan keuntungan sebesar Rp {abs(delta):.2f} Juta** (naik {abs(eff):.2f}% dari kondisi baseline).")
+    msg_title = "Rekomendasi Positif"
+    msg_body = f"Keputusan Anda menaikkan/mengubah tuas kebijakan terbukti efektif. Toko diprediksi akan mengalami <strong>peningkatan keuntungan sebesar Rp {abs(delta):.2f} Juta</strong> (naik {abs(eff):.2f}% dari kondisi baseline)."
+    border_color = "#2e8b57"
+    icon_n = "trending-up"
 elif delta < 0:
-    st.warning(f"**Peringatan Risiko:** Berhati-hatilah dengan skenario ini! Kebijakan yang Anda pilih diprediksi akan menimbulkan **kerugian sebesar Rp {abs(delta):.2f} Juta** (turun {abs(eff):.2f}% dibandingkan kondisi saat ini).")
+    msg_title = "Peringatan Risiko"
+    msg_body = f"Berhati-hatilah dengan skenario ini! Kebijakan yang Anda pilih diprediksi akan menimbulkan <strong>kerugian sebesar Rp {abs(delta):.2f} Juta</strong> (turun {abs(eff):.2f}% dibandingkan kondisi saat ini)."
+    border_color = "#c0392b"
+    icon_n = "trending-down"
 else:
-    st.info("**Kondisi Stabil:** Skenario yang Anda terapkan sama dengan baseline. Tidak ada proyeksi perubahan pada keuntungan toko.")
+    msg_title = "Kondisi Stabil"
+    msg_body = "Skenario yang Anda terapkan sama dengan baseline. Tidak ada proyeksi perubahan pada keuntungan toko."
+    border_color = "#3A6EA5"
+    icon_n = "minus"
+
+st.markdown(f"""
+<div style="background: rgba(255, 255, 255, 0.05); 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border-left: 4px solid {border_color};
+            padding: 14px 18px; 
+            font-size: 0.85rem; 
+            color: #FFFFFF; 
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div style="font-size: 0.95rem; font-weight: bold; margin-bottom: 6px; color: {border_color}; display: flex; align-items: center; gap: 8px;">
+        {icon(icon_n, 16, border_color)} {msg_title}
+    </div>
+    <div style="line-height: 1.6;">
+        {msg_body}
+    </div>
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("<br>", unsafe_allow_html=True)
 
