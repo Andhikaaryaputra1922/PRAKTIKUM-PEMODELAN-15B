@@ -396,12 +396,66 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 # --- VISUALISASI GRAFIK ---
 st.markdown(f"<div class='section-header'>{icon('pie-chart', 28)} Perbandingan Hasil</div>", unsafe_allow_html=True)
-chart_df = pd.DataFrame({
-    'Skenario'  : ['1. Baseline (Kondisi Awal)', '2. Intervensi (Skenario Baru)'],
-    'Keuntungan': [b_pred, i_pred]
-}).set_index('Skenario')
 
-st.bar_chart(chart_df, color="#3A6EA5", height=300)
+import plotly.graph_objects as go
+
+# Warna bar intervensi: hijau jika untung, merah jika rugi, abu jika sama
+intervensi_color = "#2e8b57" if delta > 0 else ("#c0392b" if delta < 0 else "#7f8c8d")
+
+fig = go.Figure(data=[
+    go.Bar(
+        name="Baseline",
+        x=["Baseline (Kondisi Awal)"],
+        y=[b_pred],
+        marker=dict(
+            color="#3A6EA5",
+            line=dict(color="#1A2F50", width=3)
+        ),
+        text=[f"Rp {b_pred:.2f} Jt"],
+        textposition="outside",
+        textfont=dict(family="Space Mono", size=13, color="#1A2F50"),
+        width=0.4
+    ),
+    go.Bar(
+        name="Intervensi",
+        x=["Intervensi (Skenario Baru)"],
+        y=[i_pred],
+        marker=dict(
+            color=intervensi_color,
+            line=dict(color="#1A2F50", width=3)
+        ),
+        text=[f"Rp {i_pred:.2f} Jt"],
+        textposition="outside",
+        textfont=dict(family="Space Mono", size=13, color="#1A2F50"),
+        width=0.4
+    )
+])
+
+fig.update_layout(
+    plot_bgcolor="#F8F9FC",
+    paper_bgcolor="#F8F9FC",
+    font=dict(family="Space Mono", color="#1A2F50"),
+    height=320,
+    margin=dict(l=20, r=20, t=20, b=20),
+    legend=dict(
+        orientation="h",
+        yanchor="bottom", y=1.02,
+        xanchor="right", x=1,
+        font=dict(size=11)
+    ),
+    yaxis=dict(
+        gridcolor="#D6E0EE",
+        gridwidth=1,
+        title="Keuntungan (Juta Rp)",
+        title_font=dict(size=11)
+    ),
+    xaxis=dict(showgrid=False),
+    bargap=0.3,
+    showlegend=True
+)
+fig.update_yaxes(rangemode="tozero")
+
+st.plotly_chart(fig, use_container_width=True)
 
 
 # --- DETAIL MODEL ---
