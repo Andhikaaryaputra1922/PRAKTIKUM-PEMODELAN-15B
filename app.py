@@ -401,32 +401,32 @@ if delta > 0:
     msg_title = "Rekomendasi Positif"
     msg_body = f"Keputusan Anda menaikkan/mengubah tuas kebijakan terbukti efektif. Toko diprediksi akan mengalami <strong>peningkatan keuntungan sebesar Rp {abs(delta):.2f} Juta</strong> (naik {abs(eff):.2f}% dari kondisi baseline)."
     border_color = "#2e8b57"
-    bg_color = "rgba(46, 139, 87, 0.05)"
+    bg_color = "rgba(46, 139, 87, 0.15)"
     icon_n = "trending-up"
 elif delta < 0:
     msg_title = "Peringatan Risiko"
     msg_body = f"Berhati-hatilah dengan skenario ini! Kebijakan yang Anda pilih diprediksi akan menimbulkan <strong>kerugian sebesar Rp {abs(delta):.2f} Juta</strong> (turun {abs(eff):.2f}% dibandingkan kondisi saat ini)."
     border_color = "#c0392b"
-    bg_color = "rgba(192, 57, 43, 0.05)"
+    bg_color = "rgba(192, 57, 43, 0.15)"
     icon_n = "trending-down"
 else:
     msg_title = "Kondisi Stabil"
     msg_body = "Skenario yang Anda terapkan sama dengan baseline. Tidak ada proyeksi perubahan pada keuntungan toko."
     border_color = "#3A6EA5"
-    bg_color = "rgba(58, 110, 165, 0.05)"
+    bg_color = "rgba(58, 110, 165, 0.15)"
     icon_n = "minus"
 
 st.markdown(f"""
 <div style="background: {bg_color}; 
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border: 1px solid rgba(255, 255, 255, 0.5); 
             border-left: 4px solid {border_color};
             padding: 14px 18px; 
             font-size: 0.85rem; 
-            color: #FFFFFF; 
+            color: #1A2F50; 
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
     <div style="font-size: 0.95rem; font-weight: bold; margin-bottom: 6px; color: {border_color}; display: flex; align-items: center; gap: 8px;">
         {icon(icon_n, 16, border_color)} {msg_title}
     </div>
