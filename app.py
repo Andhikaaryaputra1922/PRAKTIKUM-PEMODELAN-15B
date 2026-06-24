@@ -409,7 +409,7 @@ fig = go.Figure(data=[
         y=[b_pred],
         marker=dict(
             color="#3A6EA5",
-            line=dict(color="#1A2F50", width=3)
+            line=dict(width=0)
         ),
         text=[f"Rp {b_pred:.2f} Jt"],
         textposition="outside",
@@ -422,7 +422,7 @@ fig = go.Figure(data=[
         y=[i_pred],
         marker=dict(
             color=intervensi_color,
-            line=dict(color="#1A2F50", width=3)
+            line=dict(width=0)
         ),
         text=[f"Rp {i_pred:.2f} Jt"],
         textposition="outside",
