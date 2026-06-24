@@ -325,13 +325,6 @@ with st.sidebar:
     iklan_slider  = st.slider("ANGGARAN IKLAN BARU (JUTA)", 0, 50, base_iklan, 1, key="slider_iklan")
     diskon_slider = st.slider("BESARAN DISKON BARU (%)",    0, 50, base_diskon, 1, key="slider_diskon")
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    if st.button("SAMAKAN DGN BASELINE", use_container_width=True):
-        st.session_state["slider_iklan"]  = base_iklan
-        st.session_state["slider_diskon"] = base_diskon
-        st.rerun()
-
 
 # --- HEADER
 st.markdown(f"""
