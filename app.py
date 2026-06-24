@@ -470,7 +470,7 @@ with st.expander("LIHAT PARAMETER MODEL REGRESI & RINCIAN PERHITUNGAN"):
     b2_x_diskon_int  = b2 * diskon_slider
 
     st.markdown(f"""
-    <div style="font-size: 0.75rem; line-height: 1.8;">
+    <div style="font-size: 0.88rem; line-height: 1.8;">
 
     <strong>① PARAMETER MODEL (Bobot Regresi Linear)</strong>
     <ul style="margin: 0.3rem 0 0.8rem 1rem;">
