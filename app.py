@@ -401,20 +401,23 @@ if delta > 0:
     msg_title = "Rekomendasi Positif"
     msg_body = f"Keputusan Anda menaikkan/mengubah tuas kebijakan terbukti efektif. Toko diprediksi akan mengalami <strong>peningkatan keuntungan sebesar Rp {abs(delta):.2f} Juta</strong> (naik {abs(eff):.2f}% dari kondisi baseline)."
     border_color = "#2e8b57"
+    bg_color = "rgba(46, 139, 87, 0.15)"
     icon_n = "trending-up"
 elif delta < 0:
     msg_title = "Peringatan Risiko"
     msg_body = f"Berhati-hatilah dengan skenario ini! Kebijakan yang Anda pilih diprediksi akan menimbulkan <strong>kerugian sebesar Rp {abs(delta):.2f} Juta</strong> (turun {abs(eff):.2f}% dibandingkan kondisi saat ini)."
     border_color = "#c0392b"
+    bg_color = "rgba(192, 57, 43, 0.15)"
     icon_n = "trending-down"
 else:
     msg_title = "Kondisi Stabil"
     msg_body = "Skenario yang Anda terapkan sama dengan baseline. Tidak ada proyeksi perubahan pada keuntungan toko."
     border_color = "#3A6EA5"
+    bg_color = "rgba(58, 110, 165, 0.15)"
     icon_n = "minus"
 
 st.markdown(f"""
-<div style="background: rgba(255, 255, 255, 0.4); 
+<div style="background: {bg_color}; 
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
             border: 1px solid rgba(255, 255, 255, 0.5); 
