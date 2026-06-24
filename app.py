@@ -503,51 +503,53 @@ fig.update_yaxes(rangemode="tozero")
 st.plotly_chart(fig, use_container_width=True)
 
 # --- PETA KEUNTUNGAN (2D CONTOUR MAP) ---
-with st.expander("LIHAT PETA KEUNTUNGAN (IKLAN VS DISKON)"):
-    # Generate grid data
-    iklan_range = np.linspace(0, 50, 50)
-    diskon_range = np.linspace(0, 50, 50)
-    I_grid, D_grid = np.meshgrid(iklan_range, diskon_range)
-    
-    # Hitung Z (Keuntungan) untuk setiap titik koordinat
-    Z_grid = model.intercept_ + (model.coef_[0] * I_grid) + (model.coef_[1] * D_grid)
-    
-    fig2d = go.Figure(data=[go.Contour(
-        z=Z_grid, x=iklan_range, y=diskon_range, 
-        colorscale='Viridis',
-        colorbar=dict(title="Keuntungan<br>(Jt Rp)", len=0.75, thickness=15),
-        contours=dict(showlines=True)
-    )])
-    
-    # Tambahkan titik Baseline
-    fig2d.add_trace(go.Scatter(
-        x=[base_iklan], y=[base_diskon],
-        mode='markers+text',
-        name='Baseline',
-        text=["Baseline"],
-        textposition="bottom center",
-        marker=dict(size=12, color='#3A6EA5', symbol='circle', line=dict(color='white', width=2))
-    ))
+st.markdown("<br>", unsafe_allow_html=True)
+st.markdown(f"<div class='section-header'>{icon('map', 28)} Peta Keuntungan (Iklan vs Diskon)</div>", unsafe_allow_html=True)
 
-    # Tambahkan titik Intervensi
-    fig2d.add_trace(go.Scatter(
-        x=[iklan_slider], y=[diskon_slider],
-        mode='markers+text',
-        name='Intervensi',
-        text=["Intervensi"],
-        textposition="top center",
-        marker=dict(size=14, color=intervensi_color, symbol='diamond', line=dict(color='white', width=2))
-    ))
-    
-    fig2d.update_layout(
-        xaxis_title='Anggaran Iklan (Juta Rp)',
-        yaxis_title='Besaran Diskon (%)',
-        margin=dict(l=0, r=0, b=0, t=30),
-        height=450,
-        legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
-    )
-    
-    st.plotly_chart(fig2d, use_container_width=True)
+# Generate grid data
+iklan_range = np.linspace(0, 50, 50)
+diskon_range = np.linspace(0, 50, 50)
+I_grid, D_grid = np.meshgrid(iklan_range, diskon_range)
+
+# Hitung Z (Keuntungan) untuk setiap titik koordinat
+Z_grid = model.intercept_ + (model.coef_[0] * I_grid) + (model.coef_[1] * D_grid)
+
+fig2d = go.Figure(data=[go.Contour(
+    z=Z_grid, x=iklan_range, y=diskon_range, 
+    colorscale='Viridis',
+    colorbar=dict(title="Keuntungan<br>(Jt Rp)", len=0.75, thickness=15),
+    contours=dict(showlines=True)
+)])
+
+# Tambahkan titik Baseline
+fig2d.add_trace(go.Scatter(
+    x=[base_iklan], y=[base_diskon],
+    mode='markers+text',
+    name='Baseline',
+    text=["Baseline"],
+    textposition="bottom center",
+    marker=dict(size=12, color='#3A6EA5', symbol='circle', line=dict(color='white', width=2))
+))
+
+# Tambahkan titik Intervensi
+fig2d.add_trace(go.Scatter(
+    x=[iklan_slider], y=[diskon_slider],
+    mode='markers+text',
+    name='Intervensi',
+    text=["Intervensi"],
+    textposition="top center",
+    marker=dict(size=14, color=intervensi_color, symbol='diamond', line=dict(color='white', width=2))
+))
+
+fig2d.update_layout(
+    xaxis_title='Anggaran Iklan (Juta Rp)',
+    yaxis_title='Besaran Diskon (%)',
+    margin=dict(l=0, r=0, b=0, t=30),
+    height=450,
+    legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
+)
+
+st.plotly_chart(fig2d, use_container_width=True)
 
 
 # --- DETAIL MODEL ---
