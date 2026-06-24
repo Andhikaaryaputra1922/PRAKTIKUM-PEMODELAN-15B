@@ -459,16 +459,48 @@ st.plotly_chart(fig, use_container_width=True)
 
 
 # --- DETAIL MODEL ---
-with st.expander("LIHAT PARAMETER MODEL REGRESI"):
+with st.expander("LIHAT PARAMETER MODEL REGRESI & RINCIAN PERHITUNGAN"):
+    # Pre-compute parts for display
+    b0   = model.intercept_
+    b1   = model.coef_[0]
+    b2   = model.coef_[1]
+    b1_x_iklan_base = b1 * base_iklan
+    b2_x_diskon_base = b2 * base_diskon
+    b1_x_iklan_int  = b1 * iklan_slider
+    b2_x_diskon_int  = b2 * diskon_slider
+
     st.markdown(f"""
-    <div style="font-size: 0.75rem; line-height: 1.5;">
-    <strong>Persamaan Matematika:</strong><br>
-    <code style="font-size: 0.75rem; background: transparent; padding: 0;">Y = {model.intercept_:.4f} + ({model.coef_[0]:.4f} * Iklan) + ({model.coef_[1]:.4f} * Diskon)</code>
-    <hr style="margin: 0.5rem 0;">
-    <ul style="margin: 0; padding-left: 1rem;">
-        <li><strong>Nilai Intercept (B0)</strong> : <code>{model.intercept_:.6f}</code></li>
-        <li><strong>Koefisien Iklan (B1)</strong> : <code>{model.coef_[0]:.6f}</code></li>
-        <li><strong>Koefisien Diskon (B2)</strong>: <code>{model.coef_[1]:.6f}</code></li>
+    <div style="font-size: 0.75rem; line-height: 1.8;">
+
+    <strong>① PARAMETER MODEL (Bobot Regresi Linear)</strong>
+    <ul style="margin: 0.3rem 0 0.8rem 1rem;">
+        <li>Intercept &nbsp;&nbsp;&nbsp;(B0) : <code>{b0:.6f}</code></li>
+        <li>Koef. Iklan &nbsp;(B1) : <code>{b1:.6f}</code></li>
+        <li>Koef. Diskon (B2) : <code>{b2:.6f}</code></li>
     </ul>
+
+    <strong>② PERSAMAAN UMUM</strong><br>
+    <code>Y = B0 + (B1 × Iklan) + (B2 × Diskon)</code>
+    <br><br>
+
+    <strong>③ PERHITUNGAN BASELINE</strong>
+    <span style="color:#3A6EA5;">(Iklan = {base_iklan} Jt, Diskon = {base_diskon}%)</span><br>
+    <code>Y_baseline = {b0:.4f} + ({b1:.4f} × {base_iklan}) + ({b2:.4f} × {base_diskon})</code><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = {b0:.4f} + ({b1_x_iklan_base:.4f}) + ({b2_x_diskon_base:.4f})</code><br>
+    <code style="color:#1A2F50;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = {b_pred:.4f} Juta</code>
+    <br><br>
+
+    <strong>④ PERHITUNGAN INTERVENSI</strong>
+    <span style="color:#3A6EA5;">(Iklan = {iklan_slider} Jt, Diskon = {diskon_slider}%)</span><br>
+    <code>Y_intervensi = {b0:.4f} + ({b1:.4f} × {iklan_slider}) + ({b2:.4f} × {diskon_slider})</code><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= {b0:.4f} + ({b1_x_iklan_int:.4f}) + ({b2_x_diskon_int:.4f})</code><br>
+    <code style="color:#1A2F50;font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= {i_pred:.4f} Juta</code>
+    <br><br>
+
+    <strong>⑤ DELTA Y (Efektivitas Kebijakan)</strong><br>
+    <code>ΔY = Y_intervensi − Y_baseline</code><br>
+    <code>&nbsp;&nbsp;&nbsp;&nbsp;= {i_pred:.4f} − {b_pred:.4f}</code><br>
+    <code style="color:{'#2e8b57' if delta >= 0 else '#c0392b'};font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;= {delta:+.4f} Juta ({eff:+.2f}%)</code>
+
     </div>
     """, unsafe_allow_html=True)
