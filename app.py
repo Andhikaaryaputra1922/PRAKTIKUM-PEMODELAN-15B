@@ -290,6 +290,8 @@ with st.sidebar:
     def alert_ui(msg, type, icn):
         st.markdown(f"<div class='custom-alert {type}'>{icon(icn, 20)} <div>{msg}</div></div>", unsafe_allow_html=True)
 
+    st.markdown("<div style='font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;'>GANTI MODEL (Opsional)</div>", unsafe_allow_html=True)
+    st.caption("Upload file `model_bisnis.pkl` hasil training Anda untuk mengganti model demo 5 baris dengan model asli yang dilatih dari dataset.")
     uploaded_file = st.file_uploader("Upload model_bisnis.pkl (Opsional)", type=["pkl"], label_visibility="collapsed")
 
     if uploaded_file is not None:
