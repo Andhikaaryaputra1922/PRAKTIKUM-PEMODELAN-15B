@@ -294,19 +294,19 @@ with st.sidebar:
     uploaded_file = st.file_uploader("Upload model_bisnis.pkl (Opsional)", type=["pkl"], label_visibility="collapsed")
     
     st.markdown(f"""
-    <div style="background: rgba(255, 255, 255, 0.05); 
+    <div style="background: rgba(255, 255, 255, 0.4); 
                 backdrop-filter: blur(12px); 
                 -webkit-backdrop-filter: blur(12px); 
-                border: 1px solid rgba(255, 255, 255, 0.2); 
+                border: 1px solid rgba(255, 255, 255, 0.5); 
                 border-left: 4px solid #3A6EA5;
                 padding: 10px 14px; 
                 font-size: 0.75rem; 
-                color: #FFFFFF; 
+                color: #1A2F50; 
                 margin-top: -10px; 
                 margin-bottom: 15px; 
                 border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        {icon('info', 12, '#3A6EA5')} <strong style="color: #FFFFFF;">Info:</strong> Upload file <code style="color: #FFFFFF; background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px; border: 1px solid rgba(255,255,255,0.1);">.pkl</code> hasil ekspor Anda untuk menerapkan model Machine Learning buatan sendiri ke dalam simulator ini.
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
+        {icon('info', 12, '#3A6EA5')} <strong style="color: #1A2F50;">Info:</strong> Upload file <code style="color: #1A2F50; background: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.1);">.pkl</code> hasil ekspor Anda untuk menerapkan model Machine Learning buatan sendiri ke dalam simulator ini.
     </div>
     """, unsafe_allow_html=True)
 
@@ -414,16 +414,16 @@ else:
     icon_n = "minus"
 
 st.markdown(f"""
-<div style="background: rgba(255, 255, 255, 0.05); 
+<div style="background: rgba(255, 255, 255, 0.4); 
             backdrop-filter: blur(12px); 
             -webkit-backdrop-filter: blur(12px); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
+            border: 1px solid rgba(255, 255, 255, 0.5); 
             border-left: 4px solid {border_color};
             padding: 14px 18px; 
             font-size: 0.85rem; 
-            color: #FFFFFF; 
+            color: #1A2F50; 
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
     <div style="font-size: 0.95rem; font-weight: bold; margin-bottom: 6px; color: {border_color}; display: flex; align-items: center; gap: 8px;">
         {icon(icon_n, 16, border_color)} {msg_title}
     </div>
