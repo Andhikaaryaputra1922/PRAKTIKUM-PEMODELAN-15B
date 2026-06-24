@@ -502,52 +502,52 @@ fig.update_yaxes(rangemode="tozero")
 
 st.plotly_chart(fig, use_container_width=True)
 
-# --- PETA KEUNTUNGAN 3D ---
-with st.expander("LIHAT PETA KEUNTUNGAN 3D (IKLAN VS DISKON)"):
+# --- PETA KEUNTUNGAN (2D CONTOUR MAP) ---
+with st.expander("LIHAT PETA KEUNTUNGAN (IKLAN VS DISKON)"):
     # Generate grid data
-    iklan_range = np.linspace(0, 50, 20)
-    diskon_range = np.linspace(0, 50, 20)
+    iklan_range = np.linspace(0, 50, 50)
+    diskon_range = np.linspace(0, 50, 50)
     I_grid, D_grid = np.meshgrid(iklan_range, diskon_range)
     
     # Hitung Z (Keuntungan) untuk setiap titik koordinat
     Z_grid = model.intercept_ + (model.coef_[0] * I_grid) + (model.coef_[1] * D_grid)
     
-    fig3d = go.Figure(data=[go.Surface(
-        z=Z_grid, x=I_grid, y=D_grid, 
+    fig2d = go.Figure(data=[go.Contour(
+        z=Z_grid, x=iklan_range, y=diskon_range, 
         colorscale='Viridis',
-        opacity=0.85,
-        colorbar=dict(title="Keuntungan<br>(Jt Rp)", len=0.75, thickness=15)
+        colorbar=dict(title="Keuntungan<br>(Jt Rp)", len=0.75, thickness=15),
+        contours=dict(showlines=True)
     )])
     
     # Tambahkan titik Baseline
-    fig3d.add_trace(go.Scatter3d(
-        x=[base_iklan], y=[base_diskon], z=[b_pred],
-        mode='markers',
+    fig2d.add_trace(go.Scatter(
+        x=[base_iklan], y=[base_diskon],
+        mode='markers+text',
         name='Baseline',
-        marker=dict(size=6, color='#3A6EA5', symbol='circle', line=dict(color='white', width=2))
+        text=["Baseline"],
+        textposition="bottom center",
+        marker=dict(size=12, color='#3A6EA5', symbol='circle', line=dict(color='white', width=2))
     ))
 
     # Tambahkan titik Intervensi
-    fig3d.add_trace(go.Scatter3d(
-        x=[iklan_slider], y=[diskon_slider], z=[i_pred],
-        mode='markers',
+    fig2d.add_trace(go.Scatter(
+        x=[iklan_slider], y=[diskon_slider],
+        mode='markers+text',
         name='Intervensi',
-        marker=dict(size=8, color=intervensi_color, symbol='diamond', line=dict(color='white', width=2))
+        text=["Intervensi"],
+        textposition="top center",
+        marker=dict(size=14, color=intervensi_color, symbol='diamond', line=dict(color='white', width=2))
     ))
     
-    fig3d.update_layout(
-        scene=dict(
-            xaxis_title='Iklan (Jt Rp)',
-            yaxis_title='Diskon (%)',
-            zaxis_title='Keuntungan (Jt Rp)',
-            camera=dict(eye=dict(x=1.5, y=-1.5, z=0.5))
-        ),
+    fig2d.update_layout(
+        xaxis_title='Anggaran Iklan (Juta Rp)',
+        yaxis_title='Besaran Diskon (%)',
         margin=dict(l=0, r=0, b=0, t=30),
         height=450,
         legend=dict(yanchor="top", y=0.99, xanchor="left", x=0.01)
     )
     
-    st.plotly_chart(fig3d, use_container_width=True)
+    st.plotly_chart(fig2d, use_container_width=True)
 
 
 # --- DETAIL MODEL ---
