@@ -504,3 +504,16 @@ with st.expander("LIHAT PARAMETER MODEL REGRESI & RINCIAN PERHITUNGAN"):
 
     </div>
     """, unsafe_allow_html=True)
+
+# --- FOOTER ---
+st.markdown("""
+<div style="margin-top: 3rem; border-top: 3px dashed #D6E0EE; padding-top: 1.2rem;
+            text-align: center; font-family: 'Space Mono', monospace;">
+    <div style="font-size: 0.7rem; color: #3A6EA5; letter-spacing: 0.12em; text-transform: uppercase;">
+        © 2025 &nbsp;·&nbsp; Andhika Arya Putra &nbsp;·&nbsp; Praktikum 15B
+    </div>
+    <div style="font-size: 0.62rem; color: #9aafc7; margin-top: 0.3rem; letter-spacing: 0.08em;">
+        Simulator Kebijakan Toko &nbsp;·&nbsp; Powered by Streamlit & Scikit-learn
+    </div>
+</div>
+""", unsafe_allow_html=True)
