@@ -295,7 +295,7 @@ with st.sidebar:
     
     st.markdown(f"""
     <div style="background-color: rgba(26, 47, 80, 0.4); border-left: 3px solid #3A6EA5; padding: 8px 12px; font-size: 0.75rem; color: #FFFFFF; margin-top: -10px; margin-bottom: 15px; border-radius: 0 4px 4px 0;">
-        {icon('info', 12, '#3A6EA5')} <strong style="color: #FFFFFF;">Info:</strong> Upload file <code style="color: #FFFFFF; background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px;">model_bisnis.pkl</code> Anda untuk mengganti model demo bawaan (5 baris) dengan model asli hasil training dari dataset.
+        {icon('info', 12, '#3A6EA5')} <strong style="color: #FFFFFF;">Info:</strong> Upload file <code style="color: #FFFFFF; background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px;">.pkl</code> hasil ekspor Anda untuk menerapkan model Machine Learning buatan sendiri ke dalam simulator ini.
     </div>
     """, unsafe_allow_html=True)
 
